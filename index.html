@@ -1,722 +1,407 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI 图像生成 笔记本</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{
+      --bg:#f6f7f9;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#3b82f6;
+      --accent-2:#10b981;
+      --note:#fffbeb;
+      --mono: 'SFMono-Regular', ui-monospace, 'SF Mono', Menlo, Monaco, "Segoe UI Mono", Roboto Mono, "Courier New", monospace;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:#111827;
+      line-height:1.6;
+    }
+
+    /* Top header */
+    header{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:white;
+      padding:18px 20px;
+      position:sticky;
+      top:0;
+      z-index:60;
+      box-shadow:0 4px 14px rgba(2,6,23,0.12);
+    }
+    .topinner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:18px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:700}
+    .logo i{font-size:22px}
+    .title-sub{opacity:.9;font-size:14px}
+
+    /* Layout */
+    .wrap{max-width:1200px;margin:30px auto;display:grid;grid-template-columns:280px 1fr;gap:24px;padding:0 16px}
+    @media (max-width:900px){.wrap{grid-template-columns:1fr;padding:0 12px}}
+
+    /* Sidebar / TOC */
+    .toc{
+      position:sticky;top:84px;
+      background:var(--card);
+      border-radius:10px;
+      padding:16px;
+      box-shadow:0 6px 18px rgba(17,24,39,0.06);
+      height:calc(100vh - 120px);
+      overflow:auto;
+    }
+    .toc h3{margin:0 0 12px;font-size:16px}
+    .toc ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+    .toc a{color:var(--accent);text-decoration:none;font-weight:600}
+    .search-input{display:flex;margin-bottom:12px}
+    .search-input input{flex:1;padding:8px;border:1px solid #e6e9ef;border-radius:8px;font-size:14px}
+    .search-input button{margin-left:8px;padding:8px 10px;border-radius:8px;border:none;background:var(--accent);color:white;cursor:pointer}
+
+    /* Main content */
+    .content{
+      background:transparent;
+      min-height:600px;
+    }
+    .card{
+      background:var(--card);
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(17,24,39,0.04);
+      margin-bottom:18px;
+    }
+    .card h2{margin:0 0 10px;font-size:20px;color:#0f172a}
+    .card p{color:var(--muted);margin-bottom:12px}
+
+    /* Notebook style blocks */
+    .note-block{border-left:4px solid var(--accent-2);padding:14px;background:linear-gradient(180deg,rgba(16,185,129,0.03),transparent);border-radius:8px;margin-bottom:12px}
+    .code{
+      font-family:var(--mono);
+      background:#0b1220;
+      color:#e6eef8;
+      padding:12px;border-radius:8px;overflow:auto;font-size:13px;
+      position:relative;
+    }
+    .copy-btn{
+      position:absolute;right:8px;top:8px;background:rgba(255,255,255,0.06);
+      border:none;color:#fff;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:13px;
+    }
+
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media (max-width:900px){.grid-3{grid-template-columns:1fr}}
+    .stat{background:linear-gradient(90deg,#fff,#fbfeff);padding:12px;border-radius:8px;text-align:center}
+    .stat h3{margin:0;font-size:18px;color:var(--accent-2)}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:600;font-size:13px;margin-right:8px;margin-bottom:8px}
+
+    /* collapsible */
+    .collapsible{cursor:pointer;display:flex;align-items:center;gap:10px}
+    .collapsible .fa{color:var(--accent)}
+    .collapse-body{margin-top:10px;display:none}
+
+    /* small helpers */
+    dl{display:grid;grid-template-columns:150px 1fr;gap:8px 18px}
+    dt{color:var(--muted);font-weight:700}
+    dd{margin:0;color:#0f172a}
+    .example-img{width:100%;height:220px;object-fit:cover;border-radius:8px}
+    .footer-note{text-align:center;color:var(--muted);font-size:13px;margin-top:10px}
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <header>
+    <div class="topinner">
+      <div class="logo"><i class="fas fa-brain"></i><div>
+        <div style="font-size:18px">AI 图像生成 笔记本</div>
+        <div class="title-sub">模型 · Prompt · 参数 · 实践示例</div>
+      </div></div>
+      <div style="margin-left:auto;color:rgba(255,255,255,0.9);font-weight:600">仓库: fun200/node-ws-copy</div>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+  <main class="wrap">
+    <!-- Sidebar / TOC -->
+    <aside class="toc" aria-label="目录">
+      <h3>目录</h3>
+      <div class="search-input">
+        <input id="toc-filter" placeholder="在笔记中搜索（示例: prompt, steps）" />
+        <button id="clear-filter" title="重置"><i class="fas fa-times"></i></button>
+      </div>
+      <ul id="toc-list">
+        <li><a href="#overview">概览</a></li>
+        <li><a href="#models">常见模型与原理</a></li>
+        <li><a href="#prompt">Prompt 工程</a></li>
+        <li><a href="#params">关键参数说明</a></li>
+        <li><a href="#templates">Prompt 模板</a></li>
+        <li><a href="#neg">Negative Prompt</a></li>
+        <li><a href="#code">代码示例</a></li>
+        <li><a href="#examples">示例与图库</a></li>
+        <li><a href="#ethics">安全与伦理</a></li>
+        <li><a href="#resources">资源链接</a></li>
+      </ul>
+      <div style="margin-top:14px;font-size:13px;color:var(--muted)">
+        Tip: 点击题目可跳转，使用右侧的复制按钮复制代码或示例 prompt。
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <section class="content">
+      <article class="card" id="overview">
+        <h2>概览</h2>
+        <p>本笔记整理 AI 图像生成的核心知识点，适用于 Stable Diffusion、DALL·E、Imagen、Midjourney 等常见管道。包含模型分类、prompt 编写技巧、常用参数与实战示例。</p>
+        <div class="note-block">
+          <strong>何为图像生成？</strong>
+          <p style="margin-top:6px;color:var(--muted)">图像生成模型以文本或条件输入为条件，通过神经网络生成图像。当前主流技术为扩散模型（Diffusion Models）、生成对抗网络（GANs）及变分自编码器（VAE）家族的潜变量方法。</p>
         </div>
+      </article>
+
+      <article class="card" id="models">
+        <h2>常见模型与原理</h2>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+          <span class="tag">Diffusion</span>
+          <span class="tag">Latent Diffusion</span>
+          <span class="tag">GAN</span>
+          <span class="tag">VAE</span>
+          <span class="tag">Transformer</span>
+        </div>
+
+        <dl>
+          <dt>扩散模型（Diffusion）</dt>
+          <dd>通过逐步向噪声中加入/去除噪声来学习数据分布，生成质量高、可控性强。</dd>
+
+          <dt>潜空间扩散（Latent Diffusion）</dt>
+          <dd>在低维潜空间（例如 VAE 编码后）执行扩散运算，显著提高速度与内存效率（如 Stable Diffusion）。</dd>
+
+          <dt>DALL·E / Imagen / Midjourney</dt>
+          <dd>这些系统在大规模数据和多模态对齐上进行了优化，具有不同的风格和后处理策略。</dd>
+
+          <dt>Prompt 到图像流程</dt>
+          <dd>文本 encoder -> 条件向量 -> 迭代采样（steps）-> 解码 -> 后处理（upscale、去噪）</dd>
+        </dl>
+      </article>
+
+      <article class="card" id="prompt">
+        <h2>Prompt 工程（Prompt Engineering）</h2>
+        <p>Prompt 决定图像的内容、风格与细节。写好 prompt 是获得可用结果的关键。</p>
+
+        <div class="note-block">
+          <strong>Prompt 结构建议</strong>
+          <ol style="margin-top:8px;color:var(--muted)">
+            <li>主体（subject）：谁/什么？（例：a red fox）</li>
+            <li>动作/场景（action/scene）：在做什么/在哪里？（例：sitting on a mossy rock in forest）</li>
+            <li>细节（details）：光照、材质、配色、镜头、构图（例：golden hour, high detail, photorealistic, 35mm lens）</li>
+            <li>风格（style）：插画/写实/赛博朋克/水彩、艺术家参考等</li>
+          </ol>
+        </div>
+
+        <div style="margin-top:10px">
+          <strong>示例 Prompt：</strong>
+          <div class="code" id="prompt-ex1">
+            <button class="copy-btn" data-copy-target="#prompt-ex1">复制</button>
+            a majestic red fox sitting on a mossy rock in a misty forest at golden hour, photorealistic, ultra detailed, 35mm lens, soft rim light
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="params">
+        <h2>关键参数说明</h2>
+        <dl>
+          <dt>Steps（采样步数）</dt>
+          <dd>更高步数通常提高细节但更慢。常见 20–100。</dd>
+
+          <dt>Guidance / CFG Scale（条件引导强度）</dt>
+          <dd>控制模型遵循文本的程度。值过高会丧失多样性，常见 6–15。</dd>
+
+          <dt>Sampler（采样器）</dt>
+          <dd>DDIM、PLMS、Euler、Euler a、DPM++ 等，影响纹理与采样速度。</dd>
+
+          <dt>Seed（随机种子）</dt>
+          <dd>固定 seed 可复现结果；不同 seed 带来不同细节和构图。</dd>
+
+          <dt>Width / Height（分辨率）</dt>
+          <dd>通常以 512/768 等为基础，越高成本越大，可能需要 tiled 或 super-resolution。</dd>
+        </dl>
+      </article>
+
+      <article class="card" id="templates">
+        <h2>Prompt 模板（常用模版）</h2>
+        <p>可保存模板以便重复使用与迭代。</p>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+          <div class="stat">
+            <div style="font-size:14px;color:var(--muted)">写实</div>
+            <div style="margin-top:8px;font-weight:700">photorealistic, ultra detailed, 35mm lens, f/1.8</div>
+          </div>
+          <div class="stat">
+            <div style="font-size:14px;color:var(--muted)">插画</div>
+            <div style="margin-top:8px;font-weight:700">digital painting, soft shading, cinematic lighting</div>
+          </div>
+          <div class="stat">
+            <div style="font-size:14px;color:var(--muted)">艺术家风格</div>
+            <div style="margin-top:8px;font-weight:700">in the style of Studio Ghibli, watercolor</div>
+          </div>
+        </div>
+
+        <div class="code" id="template-1">
+          <button class="copy-btn" data-copy-target="#template-1">复制</button>
+          cinematic portrait of {subject}, dramatic rim lighting, photorealistic, high detail, 50mm lens, shallow depth of field
+        </div>
+      </article>
+
+      <article class="card" id="neg">
+        <h2>Negative Prompt（反向提示）</h2>
+        <p>用于告诉模型避免哪些元素（例如：低质量、畸变、额外手指等）。在 Stable Diffusion 等系统中非常常用。</p>
+
+        <div class="code" id="neg-ex">
+          <button class="copy-btn" data-copy-target="#neg-ex">复制</button>
+          low quality, deformed, blurry, extra limbs, text, watermark, poorly drawn hands, bad anatomy
+        </div>
+      </article>
+
+      <article class="card" id="code">
+        <h2>代码示例</h2>
+        <p>下面示例展示如何调用常见的 WebUI（如 Stable Diffusion WebUI API）或通用 REST 接口的请求示例（请替换为你自己的 endpoint 和 API key）。</p>
+
+        <div class="code" id="code-js">
+          <button class="copy-btn" data-copy-target="#code-js">复制</button>
+          // JavaScript fetch 示例 (Stable Diffusion WebUI)
+          const payload = {
+            prompt: "a majestic red fox sitting on a mossy rock in a misty forest, photorealistic",
+            steps: 28,
+            width: 768,
+            height: 512,
+            cfg_scale: 7.5,
+            sampler_name: "DPM++ 2M Karras",
+            seed: -1
+          };
+          fetch("http://127.0.0.1:7860/sdapi/v1/txt2img", {
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(payload)
+          }).then(r=>r.json()).then(data=>{
+            // data.images[0] base64 -> 显示或保存为文件
+            console.log(data);
+          });
+        </div>
+
+        <div class="code" id="code-openai" style="margin-top:12px">
+          <button class="copy-btn" data-copy-target="#code-openai">复制</button>
+          // OpenAI / Azure 等服务的伪示例 (请依据实际 API 调整)
+          fetch("https://api.example.com/v1/images/generate", {
+            method: "POST",
+            headers: {"Authorization":"Bearer YOUR_KEY","Content-Type":"application/json"},
+            body: JSON.stringify({prompt:"a black cat in a spaceship, highly detailed"})
+          }).then(r=>r.json()).then(res=>{
+            // 处理 image 返回
+            console.log(res);
+          });
+        </div>
+      </article>
+
+      <article class="card" id="examples">
+        <h2>示例与图库</h2>
+        <p>下面展示若干示例图（占位），你可以替换为真实生成图或上传的图像。</p>
+
+        <div class="grid-3" style="margin-top:12px">
+          <div class="card">
+            <img class="example-img" src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=1200&auto=format&fit=crop" alt="示例1" />
+            <div style="margin-top:8px;font-weight:700">示例：森林中的狐狸</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:6px">Prompt: a majestic red fox sitting on a mossy rock in a misty forest, photorealistic</div>
+          </div>
+          <div class="card">
+            <img class="example-img" src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?q=80&w=1200&auto=format&fit=crop" alt="示例2" />
+            <div style="margin-top:8px;font-weight:700">示例：科技赛博</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:6px">Prompt: cyberpunk city at night, neon lights, rainy, cinematic</div>
+          </div>
+          <div class="card">
+            <img class="example-img" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="示例3" />
+            <div style="margin-top:8px;font-weight:700">示例：水彩风景</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:6px">Prompt: watercolor landscape of mountains at sunrise</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="ethics">
+        <h2>安全与伦理</h2>
+        <p>使用图像生成模型时请注意：</p>
+        <ul style="color:var(--muted)">
+          <li>避免生成侵犯版权或有害内容（仿冒受版权保护作品、生成仇恨/暴力等）。</li>
+          <li>对数据来源与训练集存在偏见的风险保持敏感。</li>
+          <li>清晰标注 AI 生成内容，遵守平台与法律规定。</li>
+        </ul>
+      </article>
+
+      <article class="card" id="resources">
+        <h2>资源与学习链接</h2>
+        <ul style="color:var(--muted)">
+          <li><a href="https://stability.ai" target="_blank" rel="noopener">Stability AI</a></li>
+          <li><a href="https://github.com/CompVis/stable-diffusion" target="_blank" rel="noopener">Stable Diffusion (CompVis)</a></li>
+          <li><a href="https://platform.openai.com/docs/guides/images" target="_blank" rel="noopener">OpenAI Images</a></li>
+          <li><a href="https://paperswithcode.com/task/image-generation" target="_blank" rel="noopener">Papers with Code - Image Generation</a></li>
+        </ul>
+        <div class="footer-note">若需我把该页面保存为仓库中的新文件或直接替换 index.html，我可以代为提交修改（请提供目标分支）。</div>
+      </article>
     </section>
+  </main>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <script>
+    // TOC filter
+    const tocFilter = document.getElementById('toc-filter');
+    const tocList = document.getElementById('toc-list');
+    const clearBtn = document.getElementById('clear-filter');
+    tocFilter.addEventListener('input', function(){
+      const q = this.value.trim().toLowerCase();
+      const items = tocList.querySelectorAll('li');
+      items.forEach(li=>{
+        const txt = li.textContent.toLowerCase();
+        li.style.display = txt.includes(q) ? '' : 'none';
+      });
+    });
+    clearBtn.addEventListener('click',()=>{tocFilter.value='';tocFilter.dispatchEvent(new Event('input'))});
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    // Collapsible sections (if later added)
+    document.querySelectorAll('.collapsible').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const body = btn.nextElementSibling;
+        if(!body) return;
+        if(body.style.display === 'none' || body.style.display === '') body.style.display = 'block';
+        else body.style.display = 'none';
+      });
+    });
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
+    // Copy buttons
+    document.querySelectorAll('.copy-btn').forEach(btn=>{
+      btn.addEventListener('click',async ()=>{
+        const target = btn.getAttribute('data-copy-target');
+        const el = document.querySelector(target);
+        if(!el) return;
+        const text = el.innerText.trim();
+        try{
+          await navigator.clipboard.writeText(text);
+          btn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+          setTimeout(()=> btn.innerHTML = '<i class="fas fa-copy"></i> 复制',1200);
+        }catch(e){
+          btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> 失败';
+          setTimeout(()=> btn.innerHTML = '<i class="fas fa-copy"></i> 复制',1200);
         }
+      });
+      // initial icon
+      btn.innerHTML = '<i class="fas fa-copy"></i> 复制';
+    });
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+    // Smooth scroll offset
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',function(e){
+        const id = this.getAttribute('href');
+        if(id==='#') return;
+        const el = document.querySelector(id);
+        if(el){
+          e.preventDefault();
+          const top = el.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({top,behavior:'smooth'});
+        }
+      });
+    });
+  </script>
 </body>
-
 </html>
